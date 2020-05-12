@@ -9,7 +9,6 @@
 
   onMount(() => {
     inline(src)
-    console.log(src)
   })
 
   let cache = {}
