@@ -18,15 +18,9 @@ yarn add svelte-inline-svg
 ``` html
 <script>
   import InlineSVG from 'svelte-inline-svg'
-
-  $: attributes = {
-    width: width,
-    height: height,
-    // ...
-  }
 </script>
 
-<InlineSVG src={src} attributes={attributes} />
+<InlineSVG src={src} />
 ```
 
 ## Props
@@ -39,7 +33,6 @@ yarn add svelte-inline-svg
 
 
 ### transformSrc
-
 ``` html
 <script>
   const transform = (svg) => {
@@ -55,6 +48,20 @@ yarn add svelte-inline-svg
 
 <InlineSVG src={src} transformSrc={transform} />
 ```
+
+### attributes
+``` html
+<script>
+  $: attributes = {
+    width: width,
+    height: height,
+    // ...
+  }
+</script
+  
+<InlineSVG src={src} attributes={attributes} />
+```
+
 
 ## Credits
 Most of the source code is ported from [Vue Inline SVG](https://github.com/shrpne/vue-inline-svg). 
