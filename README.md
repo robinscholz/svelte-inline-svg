@@ -31,6 +31,16 @@ yarn add svelte-inline-svg
 | transformSrc | `false`  | `Function` |
 | attributes   | `false`  | `Object`   |
 
+### src
+The `src` prop can either be a path or a base64-encoded string. 
+
+```
+const src = '/path/to/file.svg'
+
+// or
+
+const src = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZG...'
+```
 
 ### transformSrc
 ``` html
@@ -50,6 +60,8 @@ yarn add svelte-inline-svg
 ```
 
 ### attributes
+Attributes set via the `attributes` prop will overwrite any attributes that may be inlined in the `src`.
+
 ``` html
 <script>
   $: attributes = {
@@ -61,7 +73,6 @@ yarn add svelte-inline-svg
   
 <InlineSVG src={src} attributes={attributes} />
 ```
-
 
 ## Credits
 Most of the source code is ported from [Vue Inline SVG](https://github.com/shrpne/vue-inline-svg). 
