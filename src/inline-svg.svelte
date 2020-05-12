@@ -4,11 +4,12 @@
 	const dispatch = createEventDispatcher()
 
   export let src
-  export let transformSource = (svg) => svg
+  export let transformSrc = (svg) => svg
   export let attributes
 
   onMount(() => {
     inline(src)
+    console.log(src)
   })
 
   let cache = {}
@@ -47,7 +48,7 @@
             let svgEl = result.getElementsByTagName('svg')[0]
             if (svgEl) {
               // Apply transformation
-              svgEl = transformSource(svgEl)
+              svgEl = transformSrc(svgEl)
               resolve(svgEl)
             } else {
               reject(new Error('Loaded file is not valid SVG"'))

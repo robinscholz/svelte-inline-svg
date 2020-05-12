@@ -356,11 +356,12 @@ function create_fragment(ctx) {
 function instance($$self, $$props, $$invalidate) {
 	const dispatch = createEventDispatcher();
 	let { src } = $$props;
-	let { transformSource = svg => svg } = $$props;
+	let { transformSrc = svg => svg } = $$props;
 	let { attributes } = $$props;
 
 	onMount(() => {
 		inline(src);
+		console.log(src);
 	});
 
 	let cache = {};
@@ -384,7 +385,7 @@ function instance($$self, $$props, $$invalidate) {
 
 							if (svgEl) {
 								// Apply transformation
-								svgEl = transformSource(svgEl);
+								svgEl = transformSrc(svgEl);
 
 								resolve(svgEl);
 							} else {
@@ -447,7 +448,7 @@ function instance($$self, $$props, $$invalidate) {
 
 	$$self.$set = $$props => {
 		if ("src" in $$props) $$invalidate(3, src = $$props.src);
-		if ("transformSource" in $$props) $$invalidate(4, transformSource = $$props.transformSource);
+		if ("transformSrc" in $$props) $$invalidate(4, transformSrc = $$props.transformSrc);
 		if ("attributes" in $$props) $$invalidate(0, attributes = $$props.attributes);
 	};
 
@@ -456,7 +457,7 @@ function instance($$self, $$props, $$invalidate) {
 		svgAttrs,
 		svgContent,
 		src,
-		transformSource,
+		transformSrc,
 		cache,
 		isLoaded,
 		dispatch,
@@ -469,12 +470,7 @@ function instance($$self, $$props, $$invalidate) {
 class Inline_svg extends SvelteComponent {
 	constructor(options) {
 		super();
-
-		init(this, options, instance, create_fragment, safe_not_equal, {
-			src: 3,
-			transformSource: 4,
-			attributes: 0
-		});
+		init(this, options, instance, create_fragment, safe_not_equal, { src: 3, transformSrc: 4, attributes: 0 });
 	}
 }
 
