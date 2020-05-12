@@ -1,5 +1,8 @@
 # 🖼️ Svelte Inline SVG
 
+[![Build Status](https://flat.badgen.net/travis/robinscholz/better-rest)](https://travis-ci.com/robinscholz/svelte-inline-svg)
+[![Twitter](https://flat.badgen.net/badge/twitter/RobinScholz)](https://twitter.com/RobinScholz)
+
 A [Svelte](https://github.com/sveltejs/svelte) plugin to inline SVG sources. Ported from [Vue Inline SVG](https://github.com/shrpne/vue-inline-svg).
 
 ## Installation
