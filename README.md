@@ -20,7 +20,7 @@ yarn add svelte-inline-svg
   import InlineSVG from 'svelte-inline-svg'
 </script>
 
-<Image src={src} />
+<InlineSVG src={src} />
 ```
 
 ## Credits
