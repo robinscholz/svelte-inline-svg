@@ -361,12 +361,12 @@
 
     function instance($$self, $$props, $$invalidate) {
     	const dispatch = createEventDispatcher();
-    	let { file } = $$props;
+    	let { src } = $$props;
     	let { transformSource = svg => svg } = $$props;
     	let { attributes } = $$props;
 
     	onMount(() => {
-    		inline(file.src);
+    		inline(src);
     	});
 
     	let cache = {};
@@ -452,7 +452,7 @@
     	}
 
     	$$self.$set = $$props => {
-    		if ("file" in $$props) $$invalidate(3, file = $$props.file);
+    		if ("src" in $$props) $$invalidate(3, src = $$props.src);
     		if ("transformSource" in $$props) $$invalidate(4, transformSource = $$props.transformSource);
     		if ("attributes" in $$props) $$invalidate(0, attributes = $$props.attributes);
     	};
@@ -461,7 +461,7 @@
     		attributes,
     		svgAttrs,
     		svgContent,
-    		file,
+    		src,
     		transformSource,
     		cache,
     		isLoaded,
@@ -477,7 +477,7 @@
     		super();
 
     		init(this, options, instance, create_fragment, safe_not_equal, {
-    			file: 3,
+    			src: 3,
     			transformSource: 4,
     			attributes: 0
     		});

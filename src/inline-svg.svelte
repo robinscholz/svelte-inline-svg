@@ -3,12 +3,12 @@
 
 	const dispatch = createEventDispatcher()
 
-  export let file
+  export let src
   export let transformSource = (svg) => svg
   export let attributes
 
   onMount(() => {
-    inline(file.src)
+    inline(src)
   })
 
   let cache = {}
