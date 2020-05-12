@@ -1,11 +1,10 @@
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
 
-	const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher()
 
   export let src
   export let transformSrc = (svg) => svg
-  export let attributes
 
   onMount(() => {
     inline(src)
@@ -16,6 +15,12 @@
   let svgAttrs = {}
   let svgContent
 
+  function exclude(obj, exclude) {
+    Object.keys(obj)
+      .filter((key) => exclude.includes(key))
+      .forEach((key) => delete obj[key])
+    return obj
+  }
 
   function filterAttrs(attrs) {
     return Object.keys(attrs).reduce((result, key) => {
@@ -104,6 +109,5 @@
   xmlmns="http://www.w3.org/2000/svg"
   bind:innerHTML={svgContent}
   {...svgAttrs}
-  {...attributes}
-  contenteditable="true"
-/>
+  {...exclude($$props, ['src', 'transformSrc'])}
+  contenteditable="true" />

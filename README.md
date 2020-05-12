@@ -25,11 +25,11 @@ yarn add svelte-inline-svg
 
 ## Props
 
-| Prop         | Required | Type       |
-| ------------ | -------- | ---------- |
-| src          | `true`   | `String`   |
-| transformSrc | `false`  | `Function` |
-| attributes   | `false`  | `Object`   |
+| Prop            | Required | Type       |
+| --------------- | -------- | ---------- |
+| src             | `true`   | `String`   |
+| transformSrc    | `false`  | `Function` |
+| {...attributes} | `false`  | `Object`   |
 
 ### src
 The `src` can either be a path or a base64-encoded string. 
@@ -60,7 +60,9 @@ const src = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZG...'
 ```
 
 ### attributes
-Attributes set via the `attributes` prop will overwrite any attributes that may be inlined in the `src`.
+Attributes which are directly set, will overwrite any attributes that may be inlined in the `src`.
+
+> **WARNING**: Make sure you only set [valid attributes](https://developer.mozilla.org/de/docs/Web/SVG/Attribute)
 
 ``` html
 <script>
@@ -71,7 +73,7 @@ Attributes set via the `attributes` prop will overwrite any attributes that may 
   }
 </script
   
-<InlineSVG src={src} attributes={attributes} />
+<InlineSVG src={src} {...attributes} />
 ```
 
 ## Credits
