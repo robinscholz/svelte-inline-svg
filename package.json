@@ -4,7 +4,6 @@
   "description": "Inline SVGs in Svelte",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },
