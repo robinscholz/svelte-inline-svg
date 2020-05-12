@@ -56,6 +56,7 @@ yarn add svelte-inline-svg
 <InlineSVG src={src} transformSrc={transform} />
 ```
 
+
 ## Credits
 Most of the source code is ported from [Vue Inline SVG](https://github.com/shrpne/vue-inline-svg). 
 
