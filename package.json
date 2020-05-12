@@ -11,8 +11,8 @@
   "module": "dist/index.mjs",
   "svelte": "src/index.js",
   "keywords": [
-    "svelte", 
-    "svg", 
+    "svelte",
+    "svg",
     "inline"
   ],
   "author": "dev@studioscholz.info",
