@@ -36,9 +36,9 @@ The `src` prop can either be a path or a base64-encoded string.
 
 ```
 const src = '/path/to/file.svg'
-
-// or
-
+```
+or
+```
 const src = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZG...'
 ```
 
