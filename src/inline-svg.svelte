@@ -1,0 +1,109 @@
+<script>
+  import { onMount, createEventDispatcher } from 'svelte'
+
+	const dispatch = createEventDispatcher()
+
+  export let file
+  export let transformSource = (svg) => svg
+  export let attributes
+
+  onMount(() => {
+    inline(file.src)
+  })
+
+  let cache = {}
+  let isLoaded = false
+  let svgAttrs = {}
+  let svgContent
+
+
+  function filterAttrs(attrs) {
+    return Object.keys(attrs).reduce((result, key) => {
+      if (
+        attrs[key] !== false &&
+        attrs[key] !== null &&
+        attrs[key] !== undefined
+      ) {
+        result[key] = attrs[key]
+      }
+      return result
+    }, {})
+  }
+
+  function download(url) {
+    return new Promise((resolve, reject) => {
+      const request = new XMLHttpRequest()
+      request.open('GET', url, true)
+
+      request.onload = () => {
+        if (request.status >= 200 && request.status < 400) {
+          try {
+            // Setup a parser to convert the response to text/xml in order for it to be manipulated and changed
+            const parser = new DOMParser()
+            const result = parser.parseFromString(
+              request.responseText,
+              'text/xml'
+            )
+            let svgEl = result.getElementsByTagName('svg')[0]
+            if (svgEl) {
+              // Apply transformation
+              svgEl = transformSource(svgEl)
+              resolve(svgEl)
+            } else {
+              reject(new Error('Loaded file is not valid SVG"'))
+            }
+          } catch (error) {
+            reject(error)
+          }
+        } else {
+          reject(new Error('Error loading SVG'))
+        }
+      }
+
+      request.onerror = reject
+      request.send()
+    })
+  }
+
+  function inline(src) {
+    // fill cache by src with promise
+    if (!cache[src]) {
+      // notify svg is unloaded
+      if (isLoaded) {
+        isLoaded = false
+        dispatch('unloaded')
+        // this.$emit('unloaded');
+      }
+      // download
+      cache[src] = download(src)
+    }
+
+    // inline svg when cached promise resolves
+    cache[src]
+      .then((svg) => {
+        // copy attrs
+        const attrs = svg.attributes
+        for (let i = attrs.length - 1; i >= 0; i--) {
+          svgAttrs[attrs[i].name] = attrs[i].value
+        }
+        // copy inner html
+        svgContent = svg.innerHTML
+        // render svg element
+        isLoaded = true
+        dispatch('loaded')
+      })
+      .catch((error) => {
+        // remove cached rejected promise so next image can try load again
+        delete cache[src]
+        console.error(error)
+      })
+  }
+</script>
+
+<svg
+  xmlmns="http://www.w3.org/2000/svg"
+  bind:innerHTML={svgContent}
+  {...svgAttrs}
+  {...attributes}
+  contenteditable="true"
+/>
