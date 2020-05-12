@@ -18,9 +18,15 @@ yarn add svelte-inline-svg
 ``` html
 <script>
   import InlineSVG from 'svelte-inline-svg'
+
+  $: attributes = {
+    width: width,
+    height: height,
+    // ...
+  }
 </script>
 
-<InlineSVG src={src} />
+<InlineSVG src={src} {...attributes} />
 ```
 
 ## Credits
