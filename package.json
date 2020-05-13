@@ -16,6 +16,10 @@
     "svg",
     "inline"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robinscholz/svelte-inline-svg"
+  },
   "author": "dev@studioscholz.info",
   "license": "MIT",
   "devDependencies": {

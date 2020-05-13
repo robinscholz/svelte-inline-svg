@@ -1,5 +1,5 @@
 <script>
-  import { onMount, createEventDispatcher } from 'svelte'
+  import { onMount, createEventDispatcher, tick } from 'svelte'
 
   const dispatch = createEventDispatcher()
 
@@ -49,7 +49,7 @@
               request.responseText,
               'text/xml'
             )
-            let svgEl = result.getElementsByTagName('svg')[0]
+            let svgEl = result.querySelector('svg')
             if (svgEl) {
               // Apply transformation
               svgEl = transformSrc(svgEl)
@@ -77,7 +77,6 @@
       if (isLoaded) {
         isLoaded = false
         dispatch('unloaded')
-        // this.$emit('unloaded');
       }
       // download
       cache[src] = download(src)
@@ -85,7 +84,7 @@
 
     // inline svg when cached promise resolves
     cache[src]
-      .then((svg) => {
+      .then(async (svg) => {
         // copy attrs
         const attrs = svg.attributes
         for (let i = attrs.length - 1; i >= 0; i--) {
@@ -94,6 +93,7 @@
         // copy inner html
         svgContent = svg.innerHTML
         // render svg element
+        await tick()
         isLoaded = true
         dispatch('loaded')
       })

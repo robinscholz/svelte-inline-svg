@@ -1,17 +1,18 @@
-import { render } from '@testing-library/svelte'
+import { render, waitFor } from '@testing-library/svelte'
 import InlineSVG from '../inline-svg.svelte'
 
-const src = 'https://raw.githubusercontent.com/robinscholz/svelte-inline-svg/master/src/test/test.svg'
+const src =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MCA1MCI+CiAgPHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIi8+Cjwvc3ZnPg=='
 
 describe('inline-svg', () => {
   test('render component correctly', () => {
     const { container } = render(InlineSVG, {
       props: {
-        src: src
-      }
+        src: src,
+      },
     })
 
-    expect(container).toContainHTML('<svg')
+    expect(container).toContainHTML('svg')
   })
 
   test('has width set', () => {
@@ -19,9 +20,33 @@ describe('inline-svg', () => {
       props: {
         src: src,
         width: 50,
-      }
+      },
     })
     const element = container.querySelector('svg')
     expect(element).toHaveAttribute('width')
+  })
+
+  test('transformSrc is working', async () => {
+    const doc = document
+    const transform = (svg) => {
+      let point = doc.createElementNS('http://www.w3.org/2000/svg', 'circle')
+      point.setAttributeNS(null, 'cx', '20')
+      point.setAttributeNS(null, 'cy', '20')
+      point.setAttributeNS(null, 'r', '10')
+      point.setAttributeNS(null, 'fill', 'red')
+      svg.appendChild(point)
+      return svg
+    }
+    const { container } = render(InlineSVG, {
+      props: {
+        src: src,
+        transformSrc: transform,
+      },
+    })
+
+    const element = container.querySelector('svg')
+    await waitFor(() => {
+      expect(element).toContainHTML('circle')
+    })
   })
 })
