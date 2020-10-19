@@ -1,5 +1,5 @@
 import svelte from 'rollup-plugin-svelte'
-import resolve from 'rollup-plugin-node-resolve'
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser'
 
 const pkg = require('./package.json')
@@ -14,5 +14,5 @@ export default {
       name: 'svelte-inline-svg',
     },
   ],
-  plugins: [svelte(), resolve(), terser()],
+  plugins: [svelte(), nodeResolve(), terser()],
 }
