@@ -1,5 +1,5 @@
 import { render, waitFor } from '@testing-library/svelte'
-import InlineSVG from '../inline-svg.svelte'
+import InlineSVG from '../index.js'
 
 const src =
   'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MCA1MCI+CiAgPHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIi8+Cjwvc3ZnPg=='
