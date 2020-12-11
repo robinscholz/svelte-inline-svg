@@ -1,6 +1,6 @@
 {
   "name": "svelte-inline-svg",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Inline SVGs in Svelte",
   "main": "dist/index.js",
   "exports": {
