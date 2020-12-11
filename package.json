@@ -10,7 +10,7 @@
   "files": [
     "dist",
     "src/index.js",
-    "src/index-svg.svelte",
+    "src/inline-svg.svelte",
     "README.md",
     "LICENSE"
   ],
