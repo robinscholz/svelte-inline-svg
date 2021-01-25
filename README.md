@@ -18,6 +18,8 @@ npm install svelte-inline-svg
 yarn add svelte-inline-svg
 ```
 
+> **WARNING**: For SSR, please install the package as a dev dependency. More info [here](https://github.com/sveltejs/sapper-template#using-external-components).
+
 ## Usage
 ``` html
 <script>
