@@ -106,7 +106,7 @@
 </script>
 
 <svg
-  xmlmns="http://www.w3.org/2000/svg"
+  xmlns="http://www.w3.org/2000/svg"
   bind:innerHTML={svgContent}
   {...svgAttrs}
   {...exclude($$props, ['src', 'transformSrc'])}
