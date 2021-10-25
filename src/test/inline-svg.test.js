@@ -1,4 +1,5 @@
-import { render, waitFor } from '@testing-library/svelte'
+import { render, waitFor, fireEvent } from '@testing-library/svelte'
+import html from 'svelte-htm'
 import InlineSVG from '../index.js'
 
 const src =
@@ -48,5 +49,21 @@ describe('inline-svg', () => {
     await waitFor(() => {
       expect(element).toContainHTML('circle')
     })
+  })
+
+  test('should work onclick event', async () => {
+    let clicked = false
+
+    const { container } = render(
+      html`<${InlineSVG}
+        src="${src}"
+        width="50"
+        on:click=${() => (clicked = true)}
+      />`
+    )
+    const element = container.querySelector('svg')
+
+    await fireEvent.click(element)
+    expect(clicked).toBe(true)
   })
 })
