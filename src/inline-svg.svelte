@@ -110,4 +110,4 @@
   bind:innerHTML={svgContent}
   {...svgAttrs}
   {...exclude($$props, ['src', 'transformSrc'])}
-  contenteditable="true" />
+  contenteditable="true" on:click />
