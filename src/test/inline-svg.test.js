@@ -1,5 +1,5 @@
 import { render, waitFor, fireEvent } from '@testing-library/svelte'
-import html from 'svelte-htm'
+import { nativeEvents } from '../utils/forwardEvents.js'
 import InlineSVG from '../index.js'
 
 const src =
@@ -51,19 +51,30 @@ describe('inline-svg', () => {
     })
   })
 
-  test('should work onclick event', async () => {
-    let clicked = false
+  for (const event of nativeEvents) {
+    test(`${event} event`, async () => {
+      let clicked = false
 
-    const { container } = render(
-      html`<${InlineSVG}
-        src="${src}"
-        width="50"
-        on:click=${() => (clicked = true)}
-      />`
-    )
-    const element = container.querySelector('svg')
+      const { container, component } = render(InlineSVG, {
+        props: {
+          src: src,
+          width: 50,
+        },
+      })
 
-    await fireEvent.click(element)
-    expect(clicked).toBe(true)
-  })
+      component.$on(event, () => (clicked = true))
+      const element = container.querySelector('svg')
+  
+      await fireEvent(
+        element,
+        new MouseEvent(event, {
+          bubbles: true,
+          cancelable: true,
+        }),
+      )
+
+      expect(clicked).toBe(true)
+    })
+  }
+
 })
