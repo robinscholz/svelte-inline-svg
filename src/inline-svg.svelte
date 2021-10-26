@@ -1,7 +1,11 @@
 <script>
   import { onMount, createEventDispatcher, tick } from 'svelte'
+  import { get_current_component } from 'svelte/internal';
+  import { forwardEventsBuilder } from './utils/forwardEvents';
 
   const dispatch = createEventDispatcher()
+  const forwardEvents = forwardEventsBuilder(get_current_component());
+
 
   export let src
   export let transformSrc = (svg) => svg
@@ -106,8 +110,9 @@
 </script>
 
 <svg
+  use:forwardEvents
   xmlns="http://www.w3.org/2000/svg"
   bind:innerHTML={svgContent}
   {...svgAttrs}
   {...exclude($$props, ['src', 'transformSrc'])}
-  contenteditable="true" on:click />
+  contenteditable="true" />
