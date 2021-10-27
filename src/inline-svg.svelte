@@ -15,13 +15,6 @@
   let svgAttrs = {}
   let svgContent
 
-  function exclude(obj, exclude) {
-    Object.keys(obj)
-      .filter((key) => exclude.includes(key))
-      .forEach((key) => delete obj[key])
-    return obj
-  }
-
   function filterAttrs(attrs) {
     return Object.keys(attrs).reduce((result, key) => {
       if (
@@ -109,5 +102,5 @@
   xmlns="http://www.w3.org/2000/svg"
   bind:innerHTML={svgContent}
   {...svgAttrs}
-  {...exclude($$props, ['src', 'transformSrc'])}
+  {...$$restProps}
   contenteditable="true" />
