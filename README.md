@@ -38,10 +38,10 @@ yarn add svelte-inline-svg
 | {...attributes} | `false`  | `Object`   |
 
 ### src
-The `src` can either be a path or a base64-encoded string. 
+The `src` can either be a url or a base64-encoded string. 
 
 ```
-const src = '/path/to/file.svg'
+const src = '/url/to/file.svg'
 ```
 or
 ```
