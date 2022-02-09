@@ -1,4 +1,5 @@
-import { render, waitFor } from '@testing-library/svelte'
+import { render, waitFor, fireEvent } from '@testing-library/svelte'
+import { nativeEvents } from '../utils/forwardEvents.js'
 import InlineSVG from '../index.js'
 
 const src =
@@ -49,4 +50,31 @@ describe('inline-svg', () => {
       expect(element).toContainHTML('circle')
     })
   })
+
+  for (const event of nativeEvents) {
+    test(`${event} event`, async () => {
+      let customEvent = false
+
+      const { container, component } = render(InlineSVG, {
+        props: {
+          src: src,
+          width: 50,
+        },
+      })
+
+      component.$on(event, () => (customEvent = true))
+      const element = container.querySelector('svg')
+  
+      await fireEvent(
+        element,
+        new Event(event, {
+          bubbles: true,
+          cancelable: true,
+        }),
+      )
+
+      expect(customEvent).toBe(true)
+    })
+  }
+
 })
