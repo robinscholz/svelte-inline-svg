@@ -1,6 +1,6 @@
 {
   "name": "svelte-inline-svg",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Inline SVGs in Svelte",
   "main": "dist/index.js",
   "exports": {
@@ -14,6 +14,7 @@
     "dist",
     "src/index.js",
     "src/inline-svg.svelte",
+    "src/utils/forwardEvents.js",
     "README.md",
     "LICENSE"
   ],
