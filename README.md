@@ -83,7 +83,7 @@ Attributes which are directly set, will overwrite any attributes that may be inl
 ```
 
 ### on:event
-A list of supported native events can be [found here](./src/utils/forwardEvents).
+A list of supported native events can be [found here](/src/utils/forwardEvents.js).
 
 ``` html
 <script>
