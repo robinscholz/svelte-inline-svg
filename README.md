@@ -82,8 +82,21 @@ Attributes which are directly set, will overwrite any attributes that may be inl
 <InlineSVG src={src} {...attributes} />
 ```
 
+### on:event
+A list of supported native events can be [found here](./src/utils/forwardEvents).
+
+``` html
+<script>
+  function handleEvent(event) {
+		alert(event;
+	}
+</script>
+
+<InlineSVG src={src} on:click={handleEvent()} />
+```
+
 ## Credits
-Most of the source code is ported from [Vue Inline SVG](https://github.com/shrpne/vue-inline-svg). 
+Most of the source code is ported from [Vue Inline SVG](https://github.com/shrpne/vue-inline-svg). The native event handling is based on [this implementation](https://github.com/sveltejs/svelte/issues/2837#issuecomment-516137618) from [Hunter Perrin](https://github.com/hperrin).
 
 
 ## License
