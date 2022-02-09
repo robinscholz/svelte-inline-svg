@@ -53,7 +53,7 @@ describe('inline-svg', () => {
 
   for (const event of nativeEvents) {
     test(`${event} event`, async () => {
-      let clicked = false
+      let customEvent = false
 
       const { container, component } = render(InlineSVG, {
         props: {
@@ -62,18 +62,18 @@ describe('inline-svg', () => {
         },
       })
 
-      component.$on(event, () => (clicked = true))
+      component.$on(event, () => (customEvent = true))
       const element = container.querySelector('svg')
   
       await fireEvent(
         element,
-        new MouseEvent(event, {
+        new Event(event, {
           bubbles: true,
           cancelable: true,
         }),
       )
 
-      expect(clicked).toBe(true)
+      expect(customEvent).toBe(true)
     })
   }
 
