@@ -2,7 +2,7 @@ import { SvelteComponentTyped } from 'svelte'
 
 export declare class InlineSvgProps {
   src: string
-  transformSrc: (src: SVGElement) => SVGElement;
+  transformSrc?: (src: SVGElement) => SVGElement;
   [attribute: string]: any
 }
 
