@@ -6,6 +6,10 @@
 
 A [Svelte](https://github.com/sveltejs/svelte) plugin to inline SVG sources. Ported from [Vue Inline SVG](https://github.com/shrpne/vue-inline-svg).
 
+## Notice
+
+This package was first created before SvelteKit and the current version of Svelte existed. Sadly, I currently do not have the time nor the personal need to update this package or fix any of its current issues. However, I’d be happy to hand it over to a capable maintainer or merge any pull requests for any existing or new issues.
+
 ## Installation
 
 ### NPM
