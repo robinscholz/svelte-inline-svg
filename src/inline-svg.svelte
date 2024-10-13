@@ -13,6 +13,9 @@
   onMount(() => {
     inline(src)
   })
+  $: {
+    inline(src);
+  }
 
   let cache = {}
   let isLoaded = false
